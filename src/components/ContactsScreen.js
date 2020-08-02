@@ -7,11 +7,11 @@ export class ContactScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      contacts: [{name: "John Doe", email: "contact@example.com", phoneNumber: "+1 123 431 213", id: "1", imgUrl:'../img/photos/1.png'},
-                 {name: "Michael Kors", email: "contact@example.com", phoneNumber: "+1 123 431 213", id: "2", imgUrl:'../img/photos/2.png'},
-                 {name: "Artur Martines", email: "contact@example.com", phoneNumber: "+1 123 431 213", id: "3", imgUrl:'../img/photos/3.png'},
-                 {name: "Maria Paola", email: "contact@example.com", phoneNumber: "+1 123 431 213", id: "4", imgUrl:'../img/photos/4.png'},
-                 {name: "Rob Kross", email: "contact@example.com", phoneNumber: "+1 123 431 213", id: "5", imgUrl:'../img/photos/5.png'}],
+      contacts: [{name: "John Doe", email: "contact@example.com", phoneNumber: "+1 123 431 213", id: "1", imgUrl:'https://i.iheart.com/v3/re/new_assets/5d0763e1393f956adad9ae13'},
+                 {name: "Michael Kors", email: "contact@example.com", phoneNumber: "+1 123 431 213", id: "2", imgUrl:'https://vignette.wikia.nocookie.net/thebiglebowski/images/7/7e/The_Dude.jpeg/revision/latest/scale-to-width-down/340?cb=20111216183045'},
+                 {name: "Artur Martines", email: "contact@example.com", phoneNumber: "+1 123 431 213", id: "3", imgUrl:'https://cdnb.artstation.com/p/assets/images/images/009/105/013/large/leo-viti-dudeclean.jpg?1524043387'},
+                 {name: "Maria Paola", email: "contact@example.com", phoneNumber: "+1 123 431 213", id: "4", imgUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQwBu8VpkbgNghQXi2HCDzZkbTHHjM-jvmtpg&usqp=CAU'},
+                 {name: "Rob Kross", email: "contact@example.com", phoneNumber: "+1 123 431 213", id: "5", imgUrl:'https://product-image.juniqe-production.juniqe.com/media/catalog/product/cache/x800/133/5/133-5-101P.jpg'}],
       searchValue: "",
       screen: 'ContactScreen',
       name: "", email: "", phoneNumber: "", imgUrl:"",
@@ -160,12 +160,12 @@ export class ContactScreen extends Component {
                   this.setState({email: text})
               }}/>
             </View>
-            {/* <View style={styles.input}>
-              <TextInput placeholderTextColor={'#B5B5B5'} placeholder={'Image path: (optional)'} email='imgUrl'
+            <View style={styles.input}>
+              <TextInput placeholderTextColor={'#B5B5B5'} placeholder={'Avatar url: (optional)'} email='imgUrl'
                 onChangeText={(text) => {
                   this.setState({imgUrl: text})
               }}/>
-            </View> */}
+            </View>
           </View>
           <View style={styles.buttonsContainer}>
             <TouchableOpacity
@@ -174,7 +174,7 @@ export class ContactScreen extends Component {
                 this.addContact({name: this.state.name, 
                                  email: this.state.email,
                                  phoneNumber: this.state.phoneNumber,
-                                //  imgUrl: this.state.imgUrl,
+                                 imgUrl: this.state.imgUrl,
                                  id: uuidv4()})
               }}
             >
@@ -202,7 +202,7 @@ export class ContactScreen extends Component {
           >
             <Image source={require('../img/arrow.png')} style={styles.arrowIcon}/>
           </TouchableOpacity>
-          <Image source={require('../img/photos/1.png')} style={styles.avatar}/>
+          <Image source={{uri: user.imgUrl}} style={styles.avatar}/>
           <View style={styles.contactInfo}>
             <View style={styles.contactInfo__container}>
               <Text style={styles.contact__header}>Name</Text>
@@ -348,6 +348,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 15
   },
+  buttonsContainerCreate:{
+    width: "75%",
+    height: 50,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
   buttonsContainer:{
     width: "75%",
     height: 50,
@@ -380,7 +388,8 @@ const styles = StyleSheet.create({
   },
   avatar:{
     width: 130,
-    height: 130
+    height: 130,
+    borderRadius: 100,
   },
   contactInfo:{
     width: "100%",
