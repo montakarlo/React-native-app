@@ -19,11 +19,22 @@ export class ContactScreen extends Component {
     }
   }
 
+  deleteContact = (id) => {
+    let prevStateContacts = this.state.contacts
+    prevStateContacts.forEach((element, index) => {
+      if (element.id === id){
+        prevStateContacts.splice(index, 1)
+        this.setState({contacts: prevStateContacts});
+      }
+    });
+  }
+
   clearNewContactInStore = () => {
     this.setState({name: "", email: "", phoneNumber: ""})
   }
 
   addContact = (data) => {
+
     if (data.name !== '' && data.email !== '' && data.phoneNumber !== '' && data.email.includes('@') && !/[^[0-9]/.test(data.phoneNumber)){
       let prevState = this.state
       data.id = uuidv4()
@@ -65,7 +76,16 @@ export class ContactScreen extends Component {
                         <Text style={styles.contactEmail}>{contact.email}</Text>
                       </View>
                     </View>
-                    <Image source={require('../img/infoIcon.png')} style={styles.infoIcon}/>
+                    <View style={styles.iconsContainer}>
+                    <TouchableOpacity id={contact.id}
+                      onPress={() => {
+                        this.deleteContact(contact.id)
+                      }}
+                    >
+                      <Image source={require('../img/bin.png')} style={styles.deleteIcon}/>
+                    </TouchableOpacity>
+                      <Image source={require('../img/infoIcon.png')} style={styles.infoIcon}/>
+                    </View>
                   </View>
                 )
               }
@@ -206,14 +226,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  iconsContainer:{
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
   contactIcon:{
     width: 30,
     height:30,
     marginRight: 15
   },
   infoIcon:{
-    width: 18,
-    height:18,
+    width: 20,
+    height: 20,
+    marginLeft: 35
+  },
+  deleteIcon:{
+    width: 20,
+    height:20,
   },
   addContact:{
     width: "100%",
