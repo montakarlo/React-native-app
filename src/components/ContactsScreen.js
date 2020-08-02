@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, TextInput, ScrollView, Image, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView, Image, Alert, TouchableOpacity } from 'react-native';
 import { v4 as uuidv4 } from 'uuid';
 
 export class ContactScreen extends Component {
@@ -15,7 +15,8 @@ export class ContactScreen extends Component {
       searchValue: "",
       screen: 'ContactScreen',
       name: "", email: "", phoneNumber: "",
-      display: "none"
+      display: "none",
+      isModalVisible: true,
     }
   }
 
@@ -54,6 +55,22 @@ export class ContactScreen extends Component {
     this.setState(prevState);
   }
 
+  createThreeButtonAlert = (name, id) =>
+    Alert.alert(
+      // "Are you sure?",
+      "Are you sure?",
+      `You want to delete "${name}" contact`,
+
+      [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => this.deleteContact(id) }
+      ],
+      { cancelable: false }
+    );
+
   render(){
     if (this.state.screen === 'ContactScreen'){
       return (
@@ -79,7 +96,8 @@ export class ContactScreen extends Component {
                     <View style={styles.iconsContainer}>
                     <TouchableOpacity id={contact.id}
                       onPress={() => {
-                        this.deleteContact(contact.id)
+                        // this.deleteContact(contact.id)
+                        this.createThreeButtonAlert(contact.name, contact.id)
                       }}
                     >
                       <Image source={require('../img/bin.png')} style={styles.deleteIcon}/>
@@ -101,6 +119,7 @@ export class ContactScreen extends Component {
               <Text style={styles.buttonText}>Add contact</Text>
             </TouchableOpacity>
           </View>
+
         </View>
       );
     } else if (this.state.screen === 'AddContactScreen'){
