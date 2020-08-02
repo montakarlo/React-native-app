@@ -43,9 +43,10 @@ export class ContactScreen extends Component {
       this.setState(prevState);
       this.changeScreen('ContactScreen')
       this.clearNewContactInStore()
-      this.setState({display: "none"});
+      // this.setState({display: "none"});
     } else {
-      this.setState({display: "flex"});
+      this.createInvalidInputAlert()
+      // this.setState({display: "flex"});
     }
   }
 
@@ -55,7 +56,7 @@ export class ContactScreen extends Component {
     this.setState(prevState);
   }
 
-  createThreeButtonAlert = (name, id) =>
+  createDeleteContactAlert = (name, id) =>
     Alert.alert(
       // "Are you sure?",
       "Are you sure?",
@@ -67,6 +68,16 @@ export class ContactScreen extends Component {
           style: "cancel"
         },
         { text: "OK", onPress: () => this.deleteContact(id) }
+      ],
+      { cancelable: false }
+    );
+
+  createInvalidInputAlert = () =>
+    Alert.alert(
+      "Incorrect input",
+      "Please type correct data\n(Only numbers as phone number.\nEmail has to exist \"@\")",
+      [
+        { text: "OK"}
       ],
       { cancelable: false }
     );
@@ -96,8 +107,7 @@ export class ContactScreen extends Component {
                     <View style={styles.iconsContainer}>
                     <TouchableOpacity id={contact.id}
                       onPress={() => {
-                        // this.deleteContact(contact.id)
-                        this.createThreeButtonAlert(contact.name, contact.id)
+                        this.createDeleteContactAlert(contact.name, contact.id)
                       }}
                     >
                       <Image source={require('../img/bin.png')} style={styles.deleteIcon}/>
