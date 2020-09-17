@@ -11,7 +11,7 @@ export class ContactScreen extends Component {
                  {name: "Michael Kors", email: "contact@example.com", phoneNumber: "+1 123 431 213", id: "2", imgUrl:'https://vignette.wikia.nocookie.net/thebiglebowski/images/7/7e/The_Dude.jpeg/revision/latest/scale-to-width-down/340?cb=20111216183045'},
                  {name: "Artur Martines", email: "contact@example.com", phoneNumber: "+1 123 431 213", id: "3", imgUrl:'https://cdnb.artstation.com/p/assets/images/images/009/105/013/large/leo-viti-dudeclean.jpg?1524043387'},
                  {name: "Maria Paola", email: "contact@example.com", phoneNumber: "+1 123 431 213", id: "4", imgUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQwBu8VpkbgNghQXi2HCDzZkbTHHjM-jvmtpg&usqp=CAU'},
-                 {name: "Rob Kross", email: "contact@example.com", phoneNumber: "+1 123 431 213", id: "5", imgUrl:'https://product-image.juniqe-production.juniqe.com/media/catalog/product/cache/x800/133/5/133-5-101P.jpg'}],
+                 {name: "Tom Kross", email: "contact@example.com", phoneNumber: "+1 123 431 213", id: "5", imgUrl:'https://product-image.juniqe-production.juniqe.com/media/catalog/product/cache/x800/133/5/133-5-101P.jpg'}],
       searchValue: "",
       screen: 'ContactScreen',
       name: "", email: "", phoneNumber: "", imgUrl:"",
